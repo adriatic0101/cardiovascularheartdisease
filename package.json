@@ -1,0 +1,30 @@
+{
+  "name": "california-poverty-heart-disease-dashboard",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run data:generate && vite",
+    "build": "npm run data:generate && tsc -b && vite build",
+    "data:generate": "node scripts/generate-data.mjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "latest",
+    "csv-parse": "latest",
+    "lucide-react": "latest",
+    "maplibre-gl": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "recharts": "latest",
+    "tailwindcss": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@vitejs/plugin-react": "latest",
+    "typescript": "latest",
+    "vite": "latest"
+  }
+}
