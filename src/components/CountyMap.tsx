@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react'
-import maplibregl, { Map as MapLibreMap, Popup } from 'maplibre-gl'
+import { AttributionControl, Map as MapLibreMap, NavigationControl, Popup, type MapLayerMouseEvent } from 'maplibre-gl'
 import type { CountyData, MapVariable } from '../types'
 import { quantiles } from '../statistics'
 
@@ -22,7 +22,7 @@ export function CountyMap({ counties, variable, selected, onSelect }: Props) {
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return
 
-    const map = new maplibregl.Map({
+    const map = new MapLibreMap({
       container: containerRef.current,
       center: [-119.45, 37.25],
       zoom: 4.7,
@@ -36,8 +36,8 @@ export function CountyMap({ counties, variable, selected, onSelect }: Props) {
       },
     })
 
-    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right')
-    map.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: 'County boundaries: U.S. Census' }))
+    map.addControl(new NavigationControl({ showCompass: false }), 'top-right')
+    map.addControl(new AttributionControl({ compact: true, customAttribution: 'County boundaries: U.S. Census' }))
 
     map.on('load', async () => {
       const response = await fetch('/data/california-counties.geojson')
@@ -71,10 +71,10 @@ export function CountyMap({ counties, variable, selected, onSelect }: Props) {
         paint: { 'line-color': '#f2b64b', 'line-width': 3.2 },
       })
 
-      const popup = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 10 })
+      const popup = new Popup({ closeButton: false, closeOnClick: false, offset: 10 })
       popupRef.current = popup
 
-      map.on('mousemove', 'county-fill', (event) => {
+      map.on('mousemove', 'county-fill', (event: MapLayerMouseEvent) => {
         map.getCanvas().style.cursor = 'pointer'
         const properties = event.features?.[0]?.properties
         if (!properties || !event.lngLat) return
@@ -96,7 +96,7 @@ export function CountyMap({ counties, variable, selected, onSelect }: Props) {
         popup.remove()
       })
 
-      map.on('click', 'county-fill', (event) => {
+      map.on('click', 'county-fill', (event: MapLayerMouseEvent) => {
         const fips = String(event.features?.[0]?.properties?.fips ?? '')
         const county = countyLookup.get(fips)
         if (county) onSelect(county)

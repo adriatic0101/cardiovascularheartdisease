@@ -1,0 +1,582 @@
+[
+  {
+    "county": "Alameda",
+    "fips": "06001",
+    "povertyRate": 9.2468,
+    "belowPoverty": 43892,
+    "women35Plus": 474670,
+    "mortalityRate": 147.1,
+    "latitude": 37.642753818,
+    "longitude": -121.8775366
+  },
+  {
+    "county": "Alpine",
+    "fips": "06003",
+    "povertyRate": 4.5553,
+    "belowPoverty": 21,
+    "women35Plus": 461,
+    "mortalityRate": 193.1,
+    "latitude": 38.594482709,
+    "longitude": -119.8169696
+  },
+  {
+    "county": "Amador",
+    "fips": "06005",
+    "povertyRate": 9.9405,
+    "belowPoverty": 1286,
+    "women35Plus": 12937,
+    "mortalityRate": 210.5,
+    "latitude": 38.442106702,
+    "longitude": -120.6446715
+  },
+  {
+    "county": "Butte",
+    "fips": "06007",
+    "povertyRate": 13.6839,
+    "belowPoverty": 7497,
+    "women35Plus": 54787,
+    "mortalityRate": 232.9,
+    "latitude": 39.662149772,
+    "longitude": -121.5929039
+  },
+  {
+    "county": "Calaveras",
+    "fips": "06009",
+    "povertyRate": 12.084,
+    "belowPoverty": 1939,
+    "women35Plus": 16046,
+    "mortalityRate": 200.2,
+    "latitude": 38.201655431,
+    "longitude": -120.5447212
+  },
+  {
+    "county": "Colusa",
+    "fips": "06011",
+    "povertyRate": 15.022,
+    "belowPoverty": 819,
+    "women35Plus": 5452,
+    "mortalityRate": 216.5,
+    "latitude": 39.179136841,
+    "longitude": -122.2328096
+  },
+  {
+    "county": "Contra Costa",
+    "fips": "06013",
+    "povertyRate": 7.9435,
+    "belowPoverty": 27671,
+    "women35Plus": 348349,
+    "mortalityRate": 155.4,
+    "latitude": 37.913225034,
+    "longitude": -121.9118696
+  },
+  {
+    "county": "Del Norte",
+    "fips": "06015",
+    "povertyRate": 11.0732,
+    "belowPoverty": 843,
+    "women35Plus": 7613,
+    "mortalityRate": 225.8,
+    "latitude": 41.740048676,
+    "longitude": -123.890022
+  },
+  {
+    "county": "El Dorado",
+    "fips": "06017",
+    "povertyRate": 7.4409,
+    "belowPoverty": 4634,
+    "women35Plus": 62277,
+    "mortalityRate": 190.9,
+    "latitude": 38.775206297,
+    "longitude": -120.5175223
+  },
+  {
+    "county": "Fresno",
+    "fips": "06019",
+    "povertyRate": 15.5566,
+    "belowPoverty": 38136,
+    "women35Plus": 245144,
+    "mortalityRate": 255.7,
+    "latitude": 36.754296703,
+    "longitude": -119.641139
+  },
+  {
+    "county": "Glenn",
+    "fips": "06021",
+    "povertyRate": 14.8249,
+    "belowPoverty": 1084,
+    "women35Plus": 7312,
+    "mortalityRate": 228.5,
+    "latitude": 39.597036054,
+    "longitude": -122.3825248
+  },
+  {
+    "county": "Humboldt",
+    "fips": "06023",
+    "povertyRate": 16.6336,
+    "belowPoverty": 6366,
+    "women35Plus": 38272,
+    "mortalityRate": 224.8,
+    "latitude": 40.698998284,
+    "longitude": -123.8637213
+  },
+  {
+    "county": "Imperial",
+    "fips": "06025",
+    "povertyRate": 18.4598,
+    "belowPoverty": 7879,
+    "women35Plus": 42682,
+    "mortalityRate": 188,
+    "latitude": 33.039838029,
+    "longitude": -115.3663522
+  },
+  {
+    "county": "Inyo",
+    "fips": "06027",
+    "povertyRate": 10.9646,
+    "belowPoverty": 632,
+    "women35Plus": 5764,
+    "mortalityRate": 270.1,
+    "latitude": 36.508506156,
+    "longitude": -117.4064861
+  },
+  {
+    "county": "Kern",
+    "fips": "06029",
+    "povertyRate": 17.1896,
+    "belowPoverty": 36404,
+    "women35Plus": 211779,
+    "mortalityRate": 295.4,
+    "latitude": 35.345271442,
+    "longitude": -118.7305113
+  },
+  {
+    "county": "Kings",
+    "fips": "06031",
+    "povertyRate": 14.6891,
+    "belowPoverty": 4552,
+    "women35Plus": 30989,
+    "mortalityRate": 245.8,
+    "latitude": 36.078519081,
+    "longitude": -119.803373
+  },
+  {
+    "county": "Lake",
+    "fips": "06033",
+    "povertyRate": 15.5033,
+    "belowPoverty": 3236,
+    "women35Plus": 20873,
+    "mortalityRate": 211.2,
+    "latitude": 39.098129118,
+    "longitude": -122.746033
+  },
+  {
+    "county": "Lassen",
+    "fips": "06035",
+    "povertyRate": 12.9419,
+    "belowPoverty": 875,
+    "women35Plus": 6761,
+    "mortalityRate": 248,
+    "latitude": 40.669358114,
+    "longitude": -120.5898736
+  },
+  {
+    "county": "Los Angeles",
+    "fips": "06037",
+    "povertyRate": 13.742,
+    "belowPoverty": 377672,
+    "women35Plus": 2748301,
+    "mortalityRate": 215.2,
+    "latitude": 34.322099482,
+    "longitude": -118.2225598
+  },
+  {
+    "county": "Madera",
+    "fips": "06039",
+    "povertyRate": 16.0203,
+    "belowPoverty": 6357,
+    "women35Plus": 39681,
+    "mortalityRate": 238.6,
+    "latitude": 37.21298745,
+    "longitude": -119.7460694
+  },
+  {
+    "county": "Marin",
+    "fips": "06041",
+    "povertyRate": 7.7386,
+    "belowPoverty": 6719,
+    "women35Plus": 86825,
+    "mortalityRate": 121.5,
+    "latitude": 38.073054486,
+    "longitude": -122.7202011
+  },
+  {
+    "county": "Mariposa",
+    "fips": "06043",
+    "povertyRate": 12.1324,
+    "belowPoverty": 689,
+    "women35Plus": 5679,
+    "mortalityRate": 245.5,
+    "latitude": 37.575745088,
+    "longitude": -119.8981354
+  },
+  {
+    "county": "Mendocino",
+    "fips": "06045",
+    "povertyRate": 14.4507,
+    "belowPoverty": 4066,
+    "women35Plus": 28137,
+    "mortalityRate": 197.1,
+    "latitude": 39.437181089,
+    "longitude": -123.3787527
+  },
+  {
+    "county": "Merced",
+    "fips": "06047",
+    "povertyRate": 19.0571,
+    "belowPoverty": 12628,
+    "women35Plus": 66264,
+    "mortalityRate": 231.2,
+    "latitude": 37.187026463,
+    "longitude": -120.7044101
+  },
+  {
+    "county": "Modoc",
+    "fips": "06049",
+    "povertyRate": 14.1163,
+    "belowPoverty": 369,
+    "women35Plus": 2614,
+    "mortalityRate": 253.2,
+    "latitude": 41.58434456,
+    "longitude": -120.7206443
+  },
+  {
+    "county": "Mono",
+    "fips": "06051",
+    "povertyRate": 7.4655,
+    "belowPoverty": 276,
+    "women35Plus": 3697,
+    "mortalityRate": 195.1,
+    "latitude": 37.933112503,
+    "longitude": -118.8836474
+  },
+  {
+    "county": "Monterey",
+    "fips": "06053",
+    "povertyRate": 12.0097,
+    "belowPoverty": 13129,
+    "women35Plus": 109320,
+    "mortalityRate": 163.1,
+    "latitude": 36.21776001,
+    "longitude": -121.2285748
+  },
+  {
+    "county": "Napa",
+    "fips": "06055",
+    "povertyRate": 7.8704,
+    "belowPoverty": 3196,
+    "women35Plus": 40608,
+    "mortalityRate": 201.6,
+    "latitude": 38.507774224,
+    "longitude": -122.3274117
+  },
+  {
+    "county": "Nevada",
+    "fips": "06057",
+    "povertyRate": 10.9688,
+    "belowPoverty": 3896,
+    "women35Plus": 35519,
+    "mortalityRate": 185.6,
+    "latitude": 39.296546085,
+    "longitude": -120.7594556
+  },
+  {
+    "county": "Orange",
+    "fips": "06059",
+    "povertyRate": 9.5844,
+    "belowPoverty": 87066,
+    "women35Plus": 908410,
+    "mortalityRate": 196.2,
+    "latitude": 33.703985123,
+    "longitude": -117.7566693
+  },
+  {
+    "county": "Placer",
+    "fips": "06061",
+    "povertyRate": 7.4786,
+    "belowPoverty": 9780,
+    "women35Plus": 130774,
+    "mortalityRate": 180.3,
+    "latitude": 39.060267873,
+    "longitude": -120.7101907
+  },
+  {
+    "county": "Plumas",
+    "fips": "06063",
+    "povertyRate": 10.7371,
+    "belowPoverty": 705,
+    "women35Plus": 6566,
+    "mortalityRate": 242.3,
+    "latitude": 40.002120628,
+    "longitude": -120.8386478
+  },
+  {
+    "county": "Riverside",
+    "fips": "06065",
+    "povertyRate": 10.7756,
+    "belowPoverty": 71091,
+    "women35Plus": 659739,
+    "mortalityRate": 260,
+    "latitude": 33.744374763,
+    "longitude": -115.9941376
+  },
+  {
+    "county": "Sacramento",
+    "fips": "06067",
+    "povertyRate": 11.4508,
+    "belowPoverty": 50714,
+    "women35Plus": 442885,
+    "mortalityRate": 210.6,
+    "latitude": 38.465506578,
+    "longitude": -121.3184265
+  },
+  {
+    "county": "San Benito",
+    "fips": "06069",
+    "povertyRate": 7.5682,
+    "belowPoverty": 1332,
+    "women35Plus": 17600,
+    "mortalityRate": 135,
+    "latitude": 36.605841241,
+    "longitude": -121.061087
+  },
+  {
+    "county": "San Bernardino",
+    "fips": "06071",
+    "povertyRate": 12.9375,
+    "belowPoverty": 71690,
+    "women35Plus": 554125,
+    "mortalityRate": 291.5,
+    "latitude": 34.843872591,
+    "longitude": -116.1759926
+  },
+  {
+    "county": "San Diego",
+    "fips": "06073",
+    "povertyRate": 10.0186,
+    "belowPoverty": 88950,
+    "women35Plus": 887847,
+    "mortalityRate": 181.4,
+    "latitude": 33.036193658,
+    "longitude": -116.7386948
+  },
+  {
+    "county": "San Francisco",
+    "fips": "06075",
+    "povertyRate": 12.2244,
+    "belowPoverty": 28962,
+    "women35Plus": 236919,
+    "mortalityRate": 155.1,
+    "latitude": 37.746700256,
+    "longitude": -122.4301026
+  },
+  {
+    "county": "San Joaquin",
+    "fips": "06077",
+    "povertyRate": 11.4382,
+    "belowPoverty": 23385,
+    "women35Plus": 204447,
+    "mortalityRate": 202,
+    "latitude": 37.934684454,
+    "longitude": -121.2628075
+  },
+  {
+    "county": "San Luis Obispo",
+    "fips": "06079",
+    "povertyRate": 8.1939,
+    "belowPoverty": 6616,
+    "women35Plus": 80743,
+    "mortalityRate": 176.3,
+    "latitude": 35.388837572,
+    "longitude": -120.4001413
+  },
+  {
+    "county": "San Mateo",
+    "fips": "06081",
+    "povertyRate": 7.3636,
+    "belowPoverty": 16493,
+    "women35Plus": 223979,
+    "mortalityRate": 140.1,
+    "latitude": 37.424398447,
+    "longitude": -122.3221847
+  },
+  {
+    "county": "Santa Barbara",
+    "fips": "06083",
+    "povertyRate": 11.0969,
+    "belowPoverty": 12298,
+    "women35Plus": 110824,
+    "mortalityRate": 190.4,
+    "latitude": 34.671971443,
+    "longitude": -120.0128358
+  },
+  {
+    "county": "Santa Clara",
+    "fips": "06085",
+    "povertyRate": 7.5537,
+    "belowPoverty": 39213,
+    "women35Plus": 519120,
+    "mortalityRate": 127.2,
+    "latitude": 37.227319166,
+    "longitude": -121.6833781
+  },
+  {
+    "county": "Santa Cruz",
+    "fips": "06087",
+    "povertyRate": 9.8899,
+    "belowPoverty": 7376,
+    "women35Plus": 74581,
+    "mortalityRate": 138.1,
+    "latitude": 37.054714207,
+    "longitude": -121.9847782
+  },
+  {
+    "county": "Shasta",
+    "fips": "06089",
+    "povertyRate": 14.4525,
+    "belowPoverty": 7924,
+    "women35Plus": 54828,
+    "mortalityRate": 254.5,
+    "latitude": 40.758401377,
+    "longitude": -122.0363525
+  },
+  {
+    "county": "Sierra",
+    "fips": "06091",
+    "povertyRate": 6.8931,
+    "belowPoverty": 69,
+    "women35Plus": 1001,
+    "mortalityRate": 228.7,
+    "latitude": 39.577703488,
+    "longitude": -120.505323
+  },
+  {
+    "county": "Siskiyou",
+    "fips": "06093",
+    "povertyRate": 15.3488,
+    "belowPoverty": 2178,
+    "women35Plus": 14190,
+    "mortalityRate": 250.1,
+    "latitude": 41.588407249,
+    "longitude": -122.5364982
+  },
+  {
+    "county": "Solano",
+    "fips": "06095",
+    "povertyRate": 9.7731,
+    "belowPoverty": 12687,
+    "women35Plus": 129816,
+    "mortalityRate": 176.5,
+    "latitude": 38.289109691,
+    "longitude": -121.9126891
+  },
+  {
+    "county": "Sonoma",
+    "fips": "06097",
+    "povertyRate": 8.7448,
+    "belowPoverty": 13330,
+    "women35Plus": 152433,
+    "mortalityRate": 182.5,
+    "latitude": 38.528152516,
+    "longitude": -122.8878053
+  },
+  {
+    "county": "Stanislaus",
+    "fips": "06099",
+    "povertyRate": 13.3085,
+    "belowPoverty": 18633,
+    "women35Plus": 140008,
+    "mortalityRate": 258.5,
+    "latitude": 37.55507903,
+    "longitude": -120.9908905
+  },
+  {
+    "county": "Sutter",
+    "fips": "06101",
+    "povertyRate": 13.4977,
+    "belowPoverty": 3531,
+    "women35Plus": 26160,
+    "mortalityRate": 213,
+    "latitude": 39.033610224,
+    "longitude": -121.6882005
+  },
+  {
+    "county": "Tehama",
+    "fips": "06103",
+    "povertyRate": 13.8994,
+    "belowPoverty": 2606,
+    "women35Plus": 18749,
+    "mortalityRate": 244.5,
+    "latitude": 40.119855412,
+    "longitude": -122.2248324
+  },
+  {
+    "county": "Trinity",
+    "fips": "06105",
+    "povertyRate": 24.3692,
+    "belowPoverty": 1381,
+    "women35Plus": 5667,
+    "mortalityRate": 211.5,
+    "latitude": 40.647540812,
+    "longitude": -123.1040176
+  },
+  {
+    "county": "Tulare",
+    "fips": "06107",
+    "povertyRate": 15.2898,
+    "belowPoverty": 16999,
+    "women35Plus": 111179,
+    "mortalityRate": 268,
+    "latitude": 36.220677241,
+    "longitude": -118.793141
+  },
+  {
+    "county": "Tuolumne",
+    "fips": "06109",
+    "povertyRate": 12.1621,
+    "belowPoverty": 2119,
+    "women35Plus": 17423,
+    "mortalityRate": 214.7,
+    "latitude": 38.024700324,
+    "longitude": -119.9474287
+  },
+  {
+    "county": "Ventura",
+    "fips": "06111",
+    "povertyRate": 8.8014,
+    "belowPoverty": 21099,
+    "women35Plus": 239724,
+    "mortalityRate": 201.8,
+    "latitude": 34.472179871,
+    "longitude": -119.0761089
+  },
+  {
+    "county": "Yolo",
+    "fips": "06113",
+    "povertyRate": 11.102,
+    "belowPoverty": 5813,
+    "women35Plus": 52360,
+    "mortalityRate": 197.2,
+    "latitude": 38.686941022,
+    "longitude": -121.8973701
+  },
+  {
+    "county": "Yuba",
+    "fips": "06115",
+    "povertyRate": 12.2627,
+    "belowPoverty": 2532,
+    "women35Plus": 20648,
+    "mortalityRate": 234.3,
+    "latitude": 39.267272227,
+    "longitude": -121.3410525
+  }
+]

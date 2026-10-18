@@ -42,7 +42,7 @@ export function ScatterAnalysis({ counties, selected, onSelect }: Props) {
           </YAxis>
           <Tooltip content={<ChartTooltip />} cursor={{ stroke: '#8ca4ad', strokeDasharray: '3 3' }} />
           <Line data={regressionLine} type="linear" dataKey="mortalityRate" stroke="#ef9f35" strokeWidth={2.5} dot={false} activeDot={false} isAnimationActive={false} />
-          <Scatter data={counties} onClick={(point) => onSelect(point as CountyData)} isAnimationActive={false}>
+          <Scatter data={counties} onClick={(point) => onSelect(point.payload as CountyData)} isAnimationActive={false}>
             {counties.map((county) => (
               <Cell
                 key={county.fips}
