@@ -136,14 +136,31 @@ function App() {
 
       <main>
         <section id="introduction" className="section-shell pt-24">
-          <SectionHeading number="01" eyebrow="Introduction" title="Economic conditions and cardiovascular health are unevenly distributed.">
-            This study examines whether California counties with higher poverty rates among women ages 35 and older also have higher female heart disease mortality rates. The county is the unit of analysis; the findings describe places, not individual risk.
+          <SectionHeading number="01" eyebrow="Introduction" title="Examining the socioeconomic geography of women’s cardiovascular mortality.">
+            Heart disease remains an important cause of mortality among adults, yet its burden is not distributed uniformly across places or populations. This study evaluates whether county-level poverty among women ages 35 and older is associated with female heart disease mortality across all 58 California counties.
           </SectionHeading>
+          <div className="mb-8 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="space-y-5 text-[1.05rem] leading-8 text-slate-600">
+              <div>
+                <h3 className="subsection-title">Study focus</h3>
+                <p className="mt-3">The analysis aligns two population measures at a common geographic scale: the percentage of women ages 35+ living below the federal poverty threshold and the age-adjusted heart disease mortality rate among women ages 35+. Restricting both measures to the same sex and broad age range strengthens their conceptual comparability.</p>
+              </div>
+              <div>
+                <h3 className="subsection-title">Why this question matters</h3>
+                <p className="mt-3">Geographic and socioeconomic disparities warrant investigation because the conditions that support cardiovascular health—including access to healthcare, preventive services, stable housing, nutritious food, and economic security—vary across communities. Identifying counties where disadvantage and mortality coincide can guide more focused research and public health assessment.</p>
+              </div>
+            </div>
+            <aside className="rounded-3xl bg-navy p-8 text-white md:p-10">
+              <p className="eyebrow !text-teal-200">Research question</p>
+              <p className="mt-5 font-serif text-2xl leading-10">To what extent are poverty rates among women ages 35+ associated with heart disease mortality rates among women ages 35+ across California’s 58 counties?</p>
+              <p className="mt-7 border-t border-white/15 pt-6 text-sm leading-6 text-slate-300">This is an ecological study: counties are the units of observation, and conclusions concern relationships between county characteristics rather than individual-level risk.</p>
+            </aside>
+          </div>
           <div className="grid gap-6 lg:grid-cols-[1fr_1fr_1fr]">
             {[
-              [UsersRound, 'Population', 'Women ages 35 and older', 'Both measures are restricted to the same sex and broad age population.'],
-              [MapPinned, 'Geography', 'California’s 58 counties', 'County-level estimates make geographic differences visible and comparable.'],
-              [TrendingUp, 'Relationship', 'Poverty and mortality', 'A bivariate ecological analysis summarizes direction, strength, and linear fit.'],
+              [UsersRound, 'Population', 'Women ages 35 and older', 'The study centers women in the age range represented by the mortality dataset and aggregates the corresponding ACS age categories.'],
+              [MapPinned, 'Study area', 'California’s 58 counties', 'Complete county coverage permits statewide comparison while preserving meaningful local geographic variation.'],
+              [TrendingUp, 'Project overview', 'Map, describe, and model', 'Interactive maps and descriptive summaries precede Pearson correlation and simple linear regression.'],
             ].map(([Icon, label, title, text]) => {
               const CardIcon = Icon as typeof UsersRound
               return (
@@ -159,43 +176,48 @@ function App() {
         </section>
 
         <section id="background" className="section-shell bg-mist">
-          <SectionHeading number="02" eyebrow="Background and Research Significance" title="Place-based analysis can identify patterns that statewide averages conceal.">
-            Poverty can shape access to preventive care, medication, stable housing, nutritious food, transportation, and other conditions relevant to cardiovascular health. Examining county patterns helps identify where socioeconomic disadvantage and mortality burdens overlap.
+          <SectionHeading number="02" eyebrow="Background and Research Significance" title="Mortality, material conditions, and place represent distinct but connected dimensions of cardiovascular health.">
+            The study is motivated by a place-based hypothesis: California counties with higher poverty rates among women ages 35+ may also experience higher female heart disease mortality rates. The proposed relationship is plausible, but the analysis is designed to assess association rather than causation.
           </SectionHeading>
-          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="rounded-3xl bg-navy p-8 text-white md:p-10">
-              <p className="eyebrow !text-teal-200">Analytic premise</p>
-              <blockquote className="mt-4 max-w-2xl font-serif text-2xl leading-10 md:text-3xl">
-                County context can reveal a population-level association, but it cannot establish that poverty causes a woman’s death from heart disease.
-              </blockquote>
-              <div className="mt-8 flex items-start gap-3 border-t border-white/15 pt-6 text-sm leading-6 text-slate-300">
-                <Info className="mt-0.5 shrink-0 text-teal-200" size={18} />
-                This distinction between population-level association and individual-level causation guides interpretation throughout the dashboard.
-              </div>
+          <div className="grid gap-5 lg:grid-cols-3">
+            <article className="background-card">
+              <p className="eyebrow">Outcome definition</p>
+              <h3 className="mt-3 font-serif text-2xl font-semibold text-navy">Mortality is not prevalence</h3>
+              <p className="mt-4 leading-7 text-slate-600">Heart disease mortality measures deaths attributed to heart disease in a defined population and period. It differs from prevalence, which measures the proportion of people living with heart disease at a given time. A county may therefore have substantial disease prevalence without an equivalent mortality rate, or elevated mortality shaped by disease severity, treatment access, survival, and population composition.</p>
+            </article>
+            <article className="background-card">
+              <p className="eyebrow">Plausible pathways</p>
+              <h3 className="mt-3 font-serif text-2xl font-semibold text-navy">Poverty may affect cardiovascular conditions</h3>
+              <p className="mt-4 leading-7 text-slate-600">Economic hardship may constrain insurance coverage, transportation, medication affordability, continuity of care, and access to screening or preventive treatment. It may also increase chronic stress and exposure to housing, food, and neighborhood conditions that are relevant to cardiovascular risk. These mechanisms can overlap and accumulate over time; they are not directly measured in the present bivariate analysis.</p>
+            </article>
+            <article className="background-card">
+              <p className="eyebrow">Geographic scale</p>
+              <h3 className="mt-3 font-serif text-2xl font-semibold text-navy">Counties offer a policy-relevant comparison</h3>
+              <p className="mt-4 leading-7 text-slate-600">California counties encompass substantial variation in population size, rurality, economic conditions, healthcare infrastructure, and service administration. They are large enough to support comparable public estimates while remaining meaningful units for public health planning. County averages nevertheless conceal within-county differences and should not be interpreted as individual experiences.</p>
+            </article>
+          </div>
+          <div className="mt-7 grid gap-7 rounded-3xl bg-navy p-8 text-white md:grid-cols-[0.75fr_1.25fr] md:p-10">
+            <div>
+              <p className="eyebrow !text-teal-200">Study hypothesis</p>
+              <p className="mt-4 font-serif text-2xl leading-9">Counties with higher female poverty rates will tend to have higher female heart disease mortality rates.</p>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-              <div className="border-l-2 border-teal bg-white p-6">
-                <h3 className="font-serif text-xl font-semibold text-navy">Public health relevance</h3>
-                <p className="mt-2 leading-7 text-slate-600">Geographic clustering may help prioritize deeper investigation and context-specific prevention resources.</p>
-              </div>
-              <div className="border-l-2 border-amber bg-white p-6">
-                <h3 className="font-serif text-xl font-semibold text-navy">Research contribution</h3>
-                <p className="mt-2 leading-7 text-slate-600">The analysis aligns age- and sex-specific poverty estimates with female mortality rates for a consistent county comparison.</p>
-              </div>
+            <div className="flex items-start gap-3 border-t border-white/15 pt-6 text-sm leading-7 text-slate-300 md:border-l md:border-t-0 md:pl-8 md:pt-0">
+              <Info className="mt-1 shrink-0 text-teal-200" size={18} />
+              <p>The hypothesis concerns the expected direction of a county-level association. A positive correlation would be consistent with the hypothesis, but would not demonstrate that poverty caused any individual death or exclude alternative explanations.</p>
             </div>
           </div>
         </section>
 
         <section id="data-sources" className="section-shell">
-          <SectionHeading number="03" eyebrow="Data Sources and Variables" title="Two public datasets, joined at the county level.">
-            The analysis uses the provided ACS table and CDC mortality extract as its primary quantitative sources. Each contributes one principal variable to a 58-row analytic file.
+          <SectionHeading number="03" eyebrow="Data Sources and Variables" title="Two public data systems provide complementary measures of socioeconomic conditions and mortality.">
+            The analytic dataset combines the U.S. Census Bureau’s American Community Survey with CDC/NVSS heart disease mortality estimates. County names and five-digit FIPS codes provide the common geographic identifiers, producing one validated record for each California county.
           </SectionHeading>
           <div className="grid gap-6 lg:grid-cols-2">
             <article className="data-card">
               <div className="data-icon"><Database size={22} /></div>
               <p className="eyebrow">Socioeconomic measure</p>
               <h3 className="mt-2 font-serif text-2xl font-semibold text-navy">Women 35+ poverty rate</h3>
-              <p className="mt-4 leading-7 text-slate-600">U.S. Census Bureau, 2020–2024 American Community Survey 5-Year Estimates, table B17001: Poverty Status in the Past 12 Months by Sex by Age.</p>
+              <p className="mt-4 leading-7 text-slate-600">The independent variable is derived from the U.S. Census Bureau’s 2020–2024 American Community Survey 5-Year Estimates, table B17001: Poverty Status in the Past 12 Months by Sex by Age.</p>
               <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-slate-200 pt-5 text-sm">
                 <div><dt className="text-slate-500">Numerator</dt><dd className="mt-1 font-semibold text-navy">Women 35+ below poverty</dd></div>
                 <div><dt className="text-slate-500">Denominator</dt><dd className="mt-1 font-semibold text-navy">All women 35+ with status determined</dd></div>
@@ -205,22 +227,24 @@ function App() {
               <div className="data-icon"><HeartPulse size={22} /></div>
               <p className="eyebrow">Health outcome</p>
               <h3 className="mt-2 font-serif text-2xl font-semibold text-navy">Female heart disease mortality rate</h3>
-              <p className="mt-4 leading-7 text-slate-600">CDC/NVSS Heart Disease Mortality Data Among U.S. Adults (35+) by State, Territory, and County, 2022–2024.</p>
+              <p className="mt-4 leading-7 text-slate-600">The dependent variable comes from the CDC/NVSS Heart Disease Mortality Data Among U.S. Adults (35+) by State, Territory, and County for 2022–2024.</p>
               <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-slate-200 pt-5 text-sm">
                 <div><dt className="text-slate-500">Measure</dt><dd className="mt-1 font-semibold text-navy">Age-adjusted, spatially smoothed 3-year average</dd></div>
                 <div><dt className="text-slate-500">Unit</dt><dd className="mt-1 font-semibold text-navy">Deaths per 100,000</dd></div>
               </dl>
             </article>
           </div>
-          <div className="mt-8 overflow-hidden rounded-2xl border border-slate-200">
-            <table className="w-full min-w-[720px] text-left text-sm">
-              <thead className="bg-navy text-white"><tr><th>Variable</th><th>Source</th><th>Population</th><th>Period</th><th>Role</th></tr></thead>
+          <div className="mt-8 overflow-x-auto rounded-2xl border border-slate-200">
+            <table className="w-full min-w-[1080px] text-left text-sm">
+              <caption className="bg-slate-50 px-5 py-4 text-left font-serif text-lg font-semibold text-navy">Operational definitions of the principal study variables</caption>
+              <thead className="bg-navy text-white"><tr><th>Variable</th><th>Source</th><th>Population</th><th>Geographic coverage</th><th>Reference period</th><th>Unit</th></tr></thead>
               <tbody>
-                <tr><td>Poverty rate</td><td>ACS B17001</td><td>Women 35+</td><td>2020–2024</td><td>Explanatory variable</td></tr>
-                <tr><td>Heart disease mortality</td><td>CDC / NVSS</td><td>Women 35+</td><td>2022–2024</td><td>Outcome variable</td></tr>
+                <tr><td>Female poverty rate, ages 35+ <span className="block text-xs font-normal text-slate-400">Independent variable</span></td><td>U.S. Census Bureau, ACS 5-Year Table B17001</td><td>Women ages 35 and older with poverty status determined</td><td>All 58 California counties</td><td>2020–2024</td><td>Percent below the federal poverty threshold</td></tr>
+                <tr><td>Female heart disease mortality rate, ages 35+ <span className="block text-xs font-normal text-slate-400">Dependent variable</span></td><td>CDC / National Vital Statistics System</td><td>Women ages 35 and older; overall race/ethnicity category</td><td>All 58 California counties</td><td>2022–2024</td><td>Age-adjusted, spatially smoothed 3-year average deaths per 100,000</td></tr>
               </tbody>
             </table>
           </div>
+          <p className="mt-4 max-w-4xl text-sm leading-6 text-slate-500">The ACS measure is an estimate of poverty status, whereas the CDC outcome is an age-adjusted and spatially smoothed mortality rate. The measures overlap in time but do not have identical reference periods.</p>
           <a
             className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-teal hover:underline"
             href={`${import.meta.env.BASE_URL}data/california_county_poverty_heart_mortality.csv`}
@@ -231,24 +255,49 @@ function App() {
         </section>
 
         <section id="methodology" className="section-shell bg-mist">
-          <SectionHeading number="04" eyebrow="Methodology" title="A transparent county-level analytic workflow.">
-            The study constructs one matched record for each California county, visualizes both measures, and estimates their unweighted linear association.
+          <SectionHeading number="04" eyebrow="Methodology" title="A reproducible ecological workflow links demographic aggregation, geographic validation, and statistical analysis.">
+            The incomplete methods outline in the supplied research document is operationalized here using the project’s implemented processing pipeline. The county is the unit of analysis, and each county contributes one paired poverty and mortality observation.
           </SectionHeading>
-          <div className="relative grid gap-5 lg:grid-cols-3">
+          <div className="mb-8 grid gap-8 lg:grid-cols-2">
+            <div>
+              <h3 className="subsection-title">Data preparation and variable construction</h3>
+              <p className="mt-3 leading-8 text-slate-600">The processing script first verifies the ACS section headings and female demographic row labels before extracting estimates. For both the below-poverty and at-or-above-poverty categories, it sums women ages 35–44, 45–54, 55–64, 65–74, and 75 years and older. The denominator includes all women in these age groups whose poverty status was determined.</p>
+              <div className="formula-box mt-5">
+                <span>Female poverty rate (%)</span>
+                <strong>100 × Women 35+ below poverty ÷ Women 35+ with poverty status determined</strong>
+              </div>
+            </div>
+            <div>
+              <h3 className="subsection-title">Mortality selection and geographic merge</h3>
+              <p className="mt-3 leading-8 text-slate-600">CDC records are restricted to California, county geography, female sex, overall race/ethnicity, and the Heart Disease Mortality topic. The retained outcome is the age-adjusted, spatially smoothed 3-year average rate per 100,000 adults ages 35+. Records are merged to ACS estimates using standardized county names and verified five-digit county FIPS codes.</p>
+              <p className="mt-4 leading-8 text-slate-600">Validation requires exactly 58 unique counties, with no duplicate FIPS codes, unmatched counties, or missing required numeric values. Missing values are not fabricated, interpolated, or replaced with zero.</p>
+            </div>
+          </div>
+
+          <div className="method-workflow" aria-label="Seven-step methodology workflow">
             {[
-              ['01', 'Construct the poverty measure', 'Sum ACS female age groups 35–44, 45–54, 55–64, 65–74, and 75+ below poverty. Divide by the same age groups below plus at or above poverty; multiply by 100.'],
-              ['02', 'Filter and join mortality', 'Retain California county records with Sex = Female and Race/Ethnicity = Overall. Join to ACS county names and verify 58 complete matches.'],
-              ['03', 'Estimate the association', 'Calculate Pearson’s r and an ordinary least squares line with poverty percentage as x and mortality per 100,000 as y. Counties receive equal analytic weight.'],
+              ['01', 'Validate source structure', 'Confirm county columns, poverty sections, female labels, and the five required age groups.'],
+              ['02', 'Aggregate women 35+', 'Sum below-poverty and at/above-poverty counts across ages 35–44 through 75+.'],
+              ['03', 'Calculate poverty rate', 'Divide the below-poverty total by all women 35+ with status determined and multiply by 100.'],
+              ['04', 'Filter CDC mortality', 'Retain California county, female, overall race/ethnicity, heart disease mortality records.'],
+              ['05', 'Merge and validate', 'Join by standardized county identity; require 58 unique, complete county records.'],
+              ['06', 'Map and describe', 'Map county values by quintile and summarize distributions, ranges, and rankings.'],
+              ['07', 'Estimate association', 'Compute Pearson correlation and an unweighted ordinary least squares regression.'],
             ].map(([step, title, text]) => (
-              <article key={step} className="method-card">
-                <span className="font-serif text-5xl text-teal/25">{step}</span>
-                <h3 className="mt-5 font-serif text-xl font-semibold text-navy">{title}</h3>
-                <p className="mt-3 leading-7 text-slate-600">{text}</p>
+              <article key={step} className="method-step">
+                <span className="method-number">{step}</span>
+                <h4 className="mt-5 font-serif text-lg font-semibold text-navy">{title}</h4>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{text}</p>
               </article>
             ))}
           </div>
+          <div className="mt-8 grid gap-5 lg:grid-cols-3">
+            <div className="method-detail"><h3>Geographic mapping</h3><p>County polygons are joined by FIPS code and displayed as interactive choropleths. Quintile classifications support relative geographic comparison; exact values remain available through selection and hover interactions.</p></div>
+            <div className="method-detail"><h3>Descriptive statistics</h3><p>The dashboard reports the number of counties, observed ranges, means, and ranked county values to characterize both variables before evaluating their relationship.</p></div>
+            <div className="method-detail"><h3>Inferential summary</h3><p>Pearson’s r summarizes the direction and strength of the linear association. Simple linear regression estimates the change in mortality rate associated with a one-percentage-point difference in poverty and reports R² as the proportion of county variation explained by the bivariate model.</p></div>
+          </div>
           <div className="mt-6 rounded-xl border border-teal/25 bg-teal/5 px-6 py-5 text-sm leading-6 text-slate-700">
-            <strong className="text-navy">Reproducibility note:</strong> the validated county-level CSV is regenerated from the two raw source files during every production build, and the application data artifact is derived from that merged table. No county estimates are manually entered.
+            <strong className="text-navy">Reproducibility note:</strong> the validated county-level CSV is regenerated from the two raw source files during every production build, and the application data artifact is derived from that merged table. Statistical estimates are calculated from these 58 unweighted county observations; no county values are manually entered.
           </div>
         </section>
 
