@@ -40,7 +40,8 @@ export function CountyMap({ counties, variable, selected, onSelect }: Props) {
     map.addControl(new AttributionControl({ compact: true, customAttribution: 'County boundaries: U.S. Census' }))
 
     map.on('load', async () => {
-      const response = await fetch('/data/california-counties.geojson')
+      const response = await fetch(`${import.meta.env.BASE_URL}data/california-counties.geojson`)
+      if (!response.ok) throw new Error(`County boundary request failed: ${response.status}`)
       const geojson = await response.json()
       geojson.features = geojson.features.map((feature: { id: string; properties: Record<string, unknown> }) => {
         const record = countyLookup.get(feature.id)

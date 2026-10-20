@@ -221,6 +221,13 @@ function App() {
               </tbody>
             </table>
           </div>
+          <a
+            className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-teal hover:underline"
+            href={`${import.meta.env.BASE_URL}data/california_county_poverty_heart_mortality.csv`}
+            download
+          >
+            Download the validated county-level CSV <ExternalLink size={15} />
+          </a>
         </section>
 
         <section id="methodology" className="section-shell bg-mist">
@@ -241,7 +248,7 @@ function App() {
             ))}
           </div>
           <div className="mt-6 rounded-xl border border-teal/25 bg-teal/5 px-6 py-5 text-sm leading-6 text-slate-700">
-            <strong className="text-navy">Reproducibility note:</strong> the dashboard’s analytic JSON is regenerated from the two source CSV files during each production build. No county estimates are manually entered.
+            <strong className="text-navy">Reproducibility note:</strong> the validated county-level CSV is regenerated from the two raw source files during every production build, and the application data artifact is derived from that merged table. No county estimates are manually entered.
           </div>
         </section>
 

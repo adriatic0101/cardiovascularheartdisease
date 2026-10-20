@@ -5,8 +5,6 @@ export type CountyData = {
   belowPoverty: number
   women35Plus: number
   mortalityRate: number
-  latitude: number
-  longitude: number
 }
 
 export type MapVariable = 'povertyRate' | 'mortalityRate'

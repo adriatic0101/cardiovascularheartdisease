@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "npm run data:generate && vite",
-    "build": "npm run data:generate && tsc -b && vite build",
-    "data:generate": "node scripts/generate-data.mjs",
+    "dev": "npm run data:process && vite",
+    "build": "npm run data:process && tsc -b && vite build",
+    "data:process": "node scripts/process-data.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
