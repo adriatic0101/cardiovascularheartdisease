@@ -7,16 +7,15 @@ import {
   HeartPulse,
   Info,
   MapPinned,
-  Scale,
   Search,
-  ShieldAlert,
   TrendingUp,
   UsersRound,
 } from 'lucide-react'
 import countyJson from './data/counties.json'
 import { CountyMap } from './components/InteractiveCountyMap'
 import { StatisticalAnalysis } from './components/StatisticalAnalysis'
-import { formatPValue, summarize } from './statistics'
+import { DetailedLimitations, ResultsConclusions } from './components/ResultsConclusions'
+import { summarize } from './statistics'
 import type { CountyData, MapVariable } from './types'
 
 const counties = countyJson as CountyData[]
@@ -92,9 +91,6 @@ function App() {
     setCountyQuery(`${county.county} County`)
     setMapFocusRequest((request) => request + 1)
   }
-
-  const highPoverty = [...counties].sort((a, b) => b.povertyRate - a.povertyRate).slice(0, 5)
-  const highMortality = [...counties].sort((a, b) => b.mortalityRate - a.mortalityRate).slice(0, 5)
 
   return (
     <div className="min-h-screen bg-white text-slate-800">
@@ -412,49 +408,17 @@ function App() {
         </section>
 
         <section id="results" className="section-shell">
-          <SectionHeading number="07" eyebrow="Results and Conclusions" title="Higher county poverty rates are associated with higher female heart disease mortality rates.">
-            Across all 58 counties, Pearson’s r is {stats.r.toFixed(3)} ({formatPValue(stats.pValue)}). The fitted model estimates {stats.slope.toFixed(2)} additional deaths per 100,000 for each one-percentage-point increase in the poverty rate among women 35+. Poverty rate alone accounts for {(stats.rSquared * 100).toFixed(1)}% of observed county variation in mortality.
+          <SectionHeading number="07" eyebrow="Results and Conclusions" title="County variation is substantial, and poverty is moderately associated with mortality.">
+            Results are reported from the complete 58-county processed dataset. All descriptive values, rankings, regression coefficients, and residuals below are calculated from the same records used in the map and interactive analysis.
           </SectionHeading>
-          <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-            <div className="rounded-3xl border border-teal/25 bg-teal/5 p-8 md:p-10">
-              <Scale className="text-teal" size={28} />
-              <h3 className="mt-6 font-serif text-2xl font-semibold text-navy">Interpretation</h3>
-              <p className="mt-4 text-lg leading-8 text-slate-700">The result supports a meaningful population-level relationship, but substantial variation remains. The estimate is descriptive and ecological; it does not demonstrate a causal effect of poverty on mortality.</p>
-              <p className="mt-5 text-sm leading-6 text-slate-500">Model: mortality rate = {stats.intercept.toFixed(2)} + {stats.slope.toFixed(2)} × poverty rate.</p>
-            </div>
-            <div className="rounded-3xl bg-navy p-8 text-white md:p-10">
-              <p className="eyebrow !text-teal-200">Observed ranges</p>
-              <div className="mt-6 space-y-6">
-                <div><p className="text-3xl font-semibold">{stats.povertyMin.toFixed(1)}–{stats.povertyMax.toFixed(1)}%</p><p className="mt-1 text-sm text-slate-300">County poverty rate</p></div>
-                <div className="h-px bg-white/15" />
-                <div><p className="text-3xl font-semibold">{stats.mortalityMin.toFixed(1)}–{stats.mortalityMax.toFixed(1)}</p><p className="mt-1 text-sm text-slate-300">County mortality rate per 100,000</p></div>
-              </div>
-            </div>
-          </div>
-          <div className="mt-8 grid gap-6 lg:grid-cols-2">
-            <Ranking title="Highest observed poverty rates" rows={highPoverty} value={(county) => `${county.povertyRate.toFixed(1)}%`} />
-            <Ranking title="Highest observed mortality rates" rows={highMortality} value={(county) => `${county.mortalityRate.toFixed(1)} per 100,000`} />
-          </div>
+          <ResultsConclusions counties={counties} />
         </section>
 
         <section id="limitations" className="section-shell bg-mist">
           <SectionHeading number="08" eyebrow="Limitations" title="The association must be interpreted within the study design.">
-            Measurement, scale, and model choices constrain what can be concluded from this county-level cross-sectional analysis.
+            Measurement uncertainty, geographic aggregation, temporal alignment, and unmodeled spatial structure constrain what can be concluded from this county-level cross-sectional analysis.
           </SectionHeading>
-          <div className="grid gap-5 md:grid-cols-2">
-            {[
-              ['Ecological inference', 'County-level correlation cannot establish that individual women in poverty have higher mortality risk. Applying a group pattern to individuals would be an ecological fallacy.'],
-              ['Causality and confounding', 'The bivariate model does not establish causation and does not adjust for age structure beyond mortality age-adjustment, race and ethnicity, rurality, health care access, smoking, or other factors.'],
-              ['Statistical uncertainty', 'ACS estimates have sampling error, especially in small counties. Spatially smoothed mortality rates also carry uncertainty that is not modeled here.'],
-              ['Time and measurement', 'ACS 2020–2024 estimates and CDC 2022–2024 mortality rates overlap but are not identical periods. Poverty is measured using the federal threshold and may not capture California cost-of-living differences.'],
-            ].map(([title, text], index) => (
-              <article key={title} className="limitation-card">
-                <div className="flex items-start justify-between gap-4"><ShieldAlert className="text-amber" size={22} /><span className="text-xs font-bold text-slate-300">0{index + 1}</span></div>
-                <h3 className="mt-6 font-serif text-xl font-semibold text-navy">{title}</h3>
-                <p className="mt-3 leading-7 text-slate-600">{text}</p>
-              </article>
-            ))}
-          </div>
+          <DetailedLimitations />
         </section>
 
         <section id="discussion" className="section-shell">
@@ -493,21 +457,6 @@ function App() {
           </div>
         </section>
       </main>
-    </div>
-  )
-}
-
-function Ranking({ title, rows, value }: { title: string; rows: CountyData[]; value: (county: CountyData) => string }) {
-  return (
-    <div className="rounded-2xl border border-slate-200 p-6">
-      <h3 className="font-serif text-xl font-semibold text-navy">{title}</h3>
-      <ol className="mt-5 space-y-3">
-        {rows.map((county, index) => (
-          <li key={county.fips} className="flex items-center justify-between gap-4 border-b border-slate-100 pb-3 text-sm last:border-0">
-            <span><b className="mr-3 text-teal">{index + 1}</b>{county.county}</span><span className="font-semibold text-navy">{value(county)}</span>
-          </li>
-        ))}
-      </ol>
     </div>
   )
 }
