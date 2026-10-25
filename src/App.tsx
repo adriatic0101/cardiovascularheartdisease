@@ -14,9 +14,9 @@ import {
   UsersRound,
 } from 'lucide-react'
 import countyJson from './data/counties.json'
-import { CountyMap } from './components/CountyMap'
-import { ScatterAnalysis } from './components/ScatterAnalysis'
-import { summarize } from './statistics'
+import { CountyMap } from './components/InteractiveCountyMap'
+import { StatisticalAnalysis } from './components/StatisticalAnalysis'
+import { formatPValue, summarize } from './statistics'
 import type { CountyData, MapVariable } from './types'
 
 const counties = countyJson as CountyData[]
@@ -67,7 +67,31 @@ function App() {
   const initialCounty = counties.find((county) => county.county === 'Fresno') ?? counties[0]
   const [selected, setSelected] = useState<CountyData>(initialCounty)
   const [mapVariable, setMapVariable] = useState<MapVariable>('povertyRate')
+  const [mapMode, setMapMode] = useState<'single' | 'compare'>('single')
+  const [countyQuery, setCountyQuery] = useState(`${initialCounty.county} County`)
+  const [mapFocusRequest, setMapFocusRequest] = useState(0)
   const handleSelect = useCallback((county: CountyData) => setSelected(county), [])
+
+  const povertyRanks = useMemo(() => new Map(
+    [...counties]
+      .sort((a, b) => b.povertyRate - a.povertyRate)
+      .map((county, index) => [county.fips, index + 1]),
+  ), [])
+  const mortalityRanks = useMemo(() => new Map(
+    [...counties]
+      .sort((a, b) => b.mortalityRate - a.mortalityRate)
+      .map((county, index) => [county.fips, index + 1]),
+  ), [])
+
+  const handleCountySearch = (event: React.FormEvent) => {
+    event.preventDefault()
+    const normalized = countyQuery.trim().toLowerCase().replace(/\s+county$/, '')
+    const county = counties.find((candidate) => candidate.county.toLowerCase() === normalized)
+    if (!county) return
+    handleSelect(county)
+    setCountyQuery(`${county.county} County`)
+    setMapFocusRequest((request) => request + 1)
+  }
 
   const highPoverty = [...counties].sort((a, b) => b.povertyRate - a.povertyRate).slice(0, 5)
   const highMortality = [...counties].sort((a, b) => b.mortalityRate - a.mortalityRate).slice(0, 5)
@@ -302,29 +326,79 @@ function App() {
         </section>
 
         <section id="map" className="section-shell">
-          <SectionHeading number="05" eyebrow="Interactive Geographic Map" title="Explore how both measures vary across California.">
-            Switch the mapped variable, hover for exact values, and select any county. The same county selection carries into the statistical chart below.
+          <SectionHeading number="05" eyebrow="Interactive Geographic Map" title="Explore county patterns in poverty and heart disease mortality.">
+            Switch between data-derived choropleth layers or compare both maps side by side. Hover for paired values, click a polygon for county details, or search by county name. The selected county is highlighted in the statistical chart below.
           </SectionHeading>
-          <div className="grid gap-6 xl:grid-cols-[1fr_18rem]">
-            <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-3 shadow-sm md:p-5">
-              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-                <div className="inline-flex rounded-full bg-slate-100 p-1" role="group" aria-label="Map variable">
-                  <button className={`toggle-button ${mapVariable === 'povertyRate' ? 'toggle-active' : ''}`} onClick={() => setMapVariable('povertyRate')}>Poverty rate</button>
-                  <button className={`toggle-button ${mapVariable === 'mortalityRate' ? 'toggle-active' : ''}`} onClick={() => setMapVariable('mortalityRate')}>Mortality rate</button>
-                </div>
-                <p className="text-xs text-slate-500">Quintile classification · click a county to select</p>
+          <div className="map-toolbar mb-5">
+            <form className="map-search" onSubmit={handleCountySearch}>
+              <label htmlFor="county-map-search">Find a county</label>
+              <div className="relative flex min-w-0 flex-1">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+                <input
+                  id="county-map-search"
+                  list="california-counties"
+                  value={countyQuery}
+                  onChange={(event) => setCountyQuery(event.target.value)}
+                  placeholder="Search county name"
+                  className="map-search-input"
+                />
+                <datalist id="california-counties">
+                  {counties.map((county) => <option key={county.fips} value={`${county.county} County`} />)}
+                </datalist>
+                <button type="submit" className="map-search-button">Locate</button>
               </div>
-              <CountyMap counties={counties} variable={mapVariable} selected={selected} onSelect={handleSelect} />
+            </form>
+            <div className="map-view-controls">
+              <span>View</span>
+              <div className="inline-flex rounded-full bg-slate-100 p-1" role="group" aria-label="Map layout">
+                <button className={`toggle-button ${mapMode === 'single' ? 'toggle-active' : ''}`} onClick={() => setMapMode('single')}>Single</button>
+                <button className={`toggle-button ${mapMode === 'compare' ? 'toggle-active' : ''}`} onClick={() => setMapMode('compare')}>Compare both</button>
+              </div>
             </div>
-            <aside className="rounded-3xl bg-navy p-7 text-white xl:sticky xl:top-24 xl:self-start">
-              <p className="eyebrow !text-teal-200">Selected county</p>
-              <h3 className="mt-2 font-serif text-3xl">{selected.county}</h3>
-              <div className="mt-7 space-y-6">
-                <div><p className="text-3xl font-semibold">{selected.povertyRate.toFixed(1)}%</p><p className="mt-1 text-sm text-slate-300">Women 35+ below poverty</p></div>
-                <div className="h-px bg-white/15" />
-                <div><p className="text-3xl font-semibold">{selected.mortalityRate.toFixed(1)}</p><p className="mt-1 text-sm text-slate-300">Deaths per 100,000 women 35+</p></div>
-                <div className="h-px bg-white/15" />
-                <div><p className="text-lg font-semibold">{formatNumber.format(selected.belowPoverty)}</p><p className="mt-1 text-sm text-slate-300">Estimated women 35+ below poverty</p></div>
+          </div>
+
+          <div className="grid gap-6 xl:grid-cols-[1fr_20rem]">
+            <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-3 shadow-sm md:p-5">
+              {mapMode === 'single' ? (
+                <>
+                  <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                    <div className="inline-flex rounded-full bg-slate-100 p-1" role="group" aria-label="Map variable">
+                      <button className={`toggle-button ${mapVariable === 'povertyRate' ? 'toggle-active' : ''}`} onClick={() => setMapVariable('povertyRate')}>Female poverty rate</button>
+                      <button className={`toggle-button ${mapVariable === 'mortalityRate' ? 'toggle-active' : ''}`} onClick={() => setMapVariable('mortalityRate')}>Female mortality rate</button>
+                    </div>
+                    <p className="text-xs text-slate-500">Hover to compare values · click to select</p>
+                  </div>
+                  <CountyMap counties={counties} variable={mapVariable} selected={selected} onSelect={handleSelect} focusRequest={mapFocusRequest} />
+                </>
+              ) : (
+                <div className="grid gap-5 lg:grid-cols-2">
+                  <div>
+                    <h3 className="mb-3 font-serif text-xl font-semibold text-navy">Female poverty rate (%)</h3>
+                    <CountyMap counties={counties} variable="povertyRate" selected={selected} onSelect={handleSelect} focusRequest={mapFocusRequest} compact />
+                  </div>
+                  <div>
+                    <h3 className="mb-3 font-serif text-xl font-semibold text-navy">Female mortality rate (per 100,000)</h3>
+                    <CountyMap counties={counties} variable="mortalityRate" selected={selected} onSelect={handleSelect} focusRequest={mapFocusRequest} compact />
+                  </div>
+                </div>
+              )}
+            </div>
+            <aside className="rounded-3xl bg-navy p-7 text-white xl:sticky xl:top-24 xl:self-start" aria-live="polite">
+              <p className="eyebrow !text-teal-200">County information</p>
+              <h3 className="mt-2 font-serif text-3xl">{selected.county} County</h3>
+              <p className="mt-1 text-xs uppercase tracking-[0.15em] text-slate-400">FIPS {selected.fips}</p>
+              <div className="mt-7 space-y-5">
+                <div><p className="text-3xl font-semibold">{selected.povertyRate.toFixed(1)}%</p><p className="mt-1 text-sm text-slate-300">Female poverty rate, ages 35+</p></div>
+                <div><p className="text-3xl font-semibold">{selected.mortalityRate.toFixed(1)}</p><p className="mt-1 text-sm text-slate-300">Female heart disease deaths per 100,000</p></div>
+                <div className="grid grid-cols-2 gap-4 border-y border-white/15 py-5">
+                  <div><p className="text-lg font-semibold">{formatNumber.format(selected.belowPoverty)}</p><p className="mt-1 text-xs leading-5 text-slate-300">Women 35+ below poverty</p></div>
+                  <div><p className="text-lg font-semibold">{formatNumber.format(selected.women35Plus)}</p><p className="mt-1 text-xs leading-5 text-slate-300">Women 35+ with status determined</p></div>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rank-card"><p>#{povertyRanks.get(selected.fips)}</p><span>Poverty rank</span></div>
+                  <div className="rank-card"><p>#{mortalityRanks.get(selected.fips)}</p><span>Mortality rank</span></div>
+                </div>
+                <p className="text-xs leading-5 text-slate-400">Rank 1 indicates the highest observed county rate among 58 counties.</p>
               </div>
             </aside>
           </div>
@@ -332,39 +406,14 @@ function App() {
 
         <section id="analysis" className="section-shell bg-mist">
           <SectionHeading number="06" eyebrow="Statistical Analysis" title="A moderate positive county-level association.">
-            Each point is one county. The orange line is the fitted ordinary least squares relationship. Select a point or use the county finder to inspect its paired values.
+            Explore the bivariate relationship, county distributions, rankings, and side-by-side comparisons. Every result below is calculated from the processed 58-county dataset; selecting a county here updates the map and every linked view.
           </SectionHeading>
-          <div className="grid gap-6 lg:grid-cols-4">
-            <div className="metric-card"><p className="metric-label">Pearson’s r</p><p className="metric-value">{stats.r.toFixed(3)}</p><p className="metric-detail">Positive direction</p></div>
-            <div className="metric-card"><p className="metric-label">R²</p><p className="metric-value">{stats.rSquared.toFixed(3)}</p><p className="metric-detail">{(stats.rSquared * 100).toFixed(1)}% of county variation</p></div>
-            <div className="metric-card"><p className="metric-label">Slope</p><p className="metric-value">{stats.slope.toFixed(2)}</p><p className="metric-detail">Deaths per 100,000 per +1 percentage point</p></div>
-            <div className="metric-card"><p className="metric-label">Two-sided test</p><p className="metric-value">p &lt; .001</p><p className="metric-detail">n = {stats.n} counties</p></div>
-          </div>
-          <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-3 shadow-sm md:p-6">
-            <div className="flex flex-wrap items-center justify-between gap-4 px-3 pt-2">
-              <div>
-                <h3 className="font-serif text-2xl font-semibold text-navy">Poverty and heart disease mortality</h3>
-                <p className="mt-1 text-sm text-slate-500">Unweighted ecological regression · California counties</p>
-              </div>
-              <label className="relative block">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
-                <select value={selected.fips} onChange={(event) => handleSelect(counties.find((county) => county.fips === event.target.value) ?? selected)} className="county-select">
-                  {counties.map((county) => <option key={county.fips} value={county.fips}>{county.county} County</option>)}
-                </select>
-              </label>
-            </div>
-            <ScatterAnalysis counties={counties} selected={selected} onSelect={handleSelect} />
-            <div className="mx-3 mb-3 flex flex-wrap gap-x-6 gap-y-2 border-t border-slate-100 pt-4 text-xs text-slate-500">
-              <span><i className="mr-2 inline-block h-2.5 w-2.5 rounded-full bg-teal" />County estimate</span>
-              <span><i className="mr-2 inline-block h-0.5 w-5 bg-amber align-middle" />OLS fitted line</span>
-              <span><i className="mr-2 inline-block h-2.5 w-2.5 rounded-full bg-amber ring-1 ring-navy" />Selected: {selected.county}</span>
-            </div>
-          </div>
+          <StatisticalAnalysis counties={counties} selected={selected} onSelect={handleSelect} />
         </section>
 
         <section id="results" className="section-shell">
           <SectionHeading number="07" eyebrow="Results and Conclusions" title="Higher county poverty rates are associated with higher female heart disease mortality rates.">
-            Across all 58 counties, Pearson’s r is {stats.r.toFixed(3)} (p &lt; .001). The fitted model estimates {stats.slope.toFixed(2)} additional deaths per 100,000 for each one-percentage-point increase in the poverty rate among women 35+. Poverty rate alone accounts for {(stats.rSquared * 100).toFixed(1)}% of observed county variation in mortality.
+            Across all 58 counties, Pearson’s r is {stats.r.toFixed(3)} ({formatPValue(stats.pValue)}). The fitted model estimates {stats.slope.toFixed(2)} additional deaths per 100,000 for each one-percentage-point increase in the poverty rate among women 35+. Poverty rate alone accounts for {(stats.rSquared * 100).toFixed(1)}% of observed county variation in mortality.
           </SectionHeading>
           <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
             <div className="rounded-3xl border border-teal/25 bg-teal/5 p-8 md:p-10">
